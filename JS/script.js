@@ -24,6 +24,7 @@ btnStart.addEventListener("click", function() {
   reset();
   createbombs(limit(), bombs)
   getHundredSq();
+  output.innerHTML = ""
   console.log(bombs)
 });
 
@@ -37,9 +38,9 @@ btnReset.addEventListener("click", reset);
 
 function init(){
   reset();
-  output.innerHTML = ""
   getHundredSq()
   square100()
+  
 }
 
 
