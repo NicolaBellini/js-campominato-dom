@@ -1,0 +1,146 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img{
+ 
+  width: 100%;
+  width: 200px;
+  object-fit: contain;
+  transition: .3s;
+}
+
+@keyframes muoviSfondo {
+  0% {
+      background-position: 20% 50%;
+  }
+  50% {
+      background-position: 100% 50%;
+  }
+  100%{
+    background-position: 20% 50%
+  }
+}
+
+.sfondo-doppio {
+  background: linear-gradient(to bottom right, #070707, #767676); /* definisci il gradiente con i due colori */
+  background-size: 400% 100%; /* dimensione del gradiente, 200% per coprire entrambi i colori */
+  animation: muoviSfondo 10s linear infinite; /* animazione per far muovere il gradiente */
+  height: 100vh;
+  width: 100%; 
+}
+
+
+img:hover{
+  animation: alzareEAbbassare 1.2s ease infinite; 
+  transition: .5s;
+}
+
+@keyframes alzareEAbbassare {
+  0% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-5px);
+  }
+  100% {
+      transform: translateY(0);
+  }
+}
+
+.main-wrapper{
+  height: 100vh;
+  width: 100%;
+  background-color: #201658;
+}
+
+.action-bar{
+  color: #ffffff;
+  border: 1px solid black;
+  width: 90%;
+  height: 10%;
+  border-radius: 20px;
+  background-color: #4d4d4d;
+}
+
+.action-bar > *{
+  margin: 0 50px;
+}
+
+.action-bar h1{
+  font-weight: 600;
+  text-wrap: nowrap;
+}
+
+.my-select{
+  width: 30%;
+  background-color: rgb(180, 180, 180);
+  outline: none !important;
+}
+
+.my-select:focus{
+  outline: grey !important;
+}
+
+.canva{
+  width: 600px;
+  height: 600px;
+  background-color: rgba(192, 192, 192, 0.077);
+  transition: 1.2s;
+  border-radius: 20px;
+  overflow: hidden;
+  outline: 1px solid white;
+}
+
+.canva:hover{
+  box-shadow: 0 0 100px #ffffff3f;
+}
+
+
+
+.square100{
+  border-radius: 6px;
+  background-color: #4d4d4d;
+  height: calc(100% / 10);
+  width: calc(100% / 10);
+  border: 2px solid #d4d4d457;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #474747;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.square81{
+  border-radius: 6px;
+  background-color: #4d4d4d;
+  height: calc(100% / 9);
+  width: calc(100% / 9);
+  border: 2px solid #d4d4d450;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #585858;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.square49{
+  border-radius: 6px;
+  background-color: #4d4d4d;
+  height: calc(100% / 7);
+  width: calc(100% / 7);
+  border: 2px solid #d4d4d452;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #434343;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.clicked{
+  background-color: #ffffff;
+}
+
