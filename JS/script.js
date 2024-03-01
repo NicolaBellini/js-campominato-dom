@@ -1,12 +1,13 @@
-const canva = document.querySelector(".canva")
-let selectInput = document.querySelector(".my-select").value
 
+// elemets
+const canva = document.querySelector(".canva")
 const btnStart = document.querySelector(".btn1")
 const btnReset = document.querySelector(".btn2")
-// faccio il reset della mia tela eliminando qualsiasi cosa abbia messo nell html
-// reset();
 
-
+// DATA
+let selectInput = document.querySelector(".my-select").value
+// in quest array metto qaunti devono essere i quadrati e la richiamo con il value della select
+const sqaurenumber = [100, 81, 49]
 
 
 // Aggiorna il valore di selectInput quando viene selezionata una nuova opzione, quando l'utente seleziona un'opzione differente nel menu a discesa, l'evento change verrà attivato. 
@@ -33,7 +34,7 @@ getHundredSq();
 
 // funzione per creare 100 quadrati e stamparli in pagina dentro a canva
 function getHundredSq(){
-  for(let i = 1; i <= setlimit(); i++){
+  for(let i = 1; i <= limit(); i++){
     const square = square100(i)
 
     canva.append(square);
@@ -44,7 +45,7 @@ function square100(indice){
 
 
   const sq = document.createElement("div");
-  sq.className= setHowManySquare();
+  sq.className = setHowManySquare();
 
   // gli do una custom property
   sq._sqID = indice
@@ -61,7 +62,8 @@ function square100(indice){
     this.innerHTML = squareText
 
     // al click del mouse aggiungo otolgo la classe .clicked, però non ho ancora tolto squaretext messo con il primo click
-    sq.classList.toggle("clicked")
+    // MODIFICATO ho tolto toggle e messo add
+    sq.classList.add("clicked")
 
     // usando un fattore ternario applico un blocco if
     this.innerHTML = (this.classList.contains("clicked"))?
@@ -82,11 +84,11 @@ function square100(indice){
 function setHowManySquare(){
   let setteddifficult = "";
 
-  if(selectInput == "Noob"){
+  if(selectInput == "0"){
     return setteddifficult = "square100"
-  }else if(selectInput == "Normal"){
+  }else if(selectInput == "1"){
     return setteddifficult = "square81";
-  }else if(selectInput == "Master"){
+  }else if(selectInput == "2"){
     return setteddifficult = "square49";
   }
 
@@ -95,20 +97,29 @@ function setHowManySquare(){
 }
 
 // in base alla difficoltà impostata con la select mette un limite numerico al quale i dovrà essere <=
-function setlimit(){
+// function setlimit(){
+//   let limit = "";
+
+//   if(selectInput == "Noob"){
+//     return limit = 100;
+//   }else if(selectInput == "Normal"){
+//     return limit = 81;
+//   }else if(selectInput == "Master"){
+//     return limit = 49;
+//   }
+
+//   return limit = 100
+
+// }
+
+// con questa funzione metto un limite al ciclo for per generare un tot di quadrati
+function limit(){
   let limit = "";
-
-  if(selectInput == "Noob"){
-    return limit = 100;
-  }else if(selectInput == "Normal"){
-    return limit = 81;
-  }else if(selectInput == "Master"){
-    return limit = 49;
-  }
-
-  return limit = 100
-
+  limit = sqaurenumber[selectInput]
+  return limit
 }
+
+
 
 
 
@@ -123,3 +134,5 @@ function init(){
 function reset(){
   canva.innerHTML = ""
 }
+
+// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: **nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
