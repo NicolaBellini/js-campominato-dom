@@ -8,7 +8,8 @@ const btnReset = document.querySelector(".btn2")
 let selectInput = document.querySelector(".my-select").value
 // in quest array metto qaunti devono essere i quadrati e la richiamo con il value della select
 const sqaurenumber = [100, 81, 49]
-
+// array bombe
+const bombs = []
 
 // Aggiorna il valore di selectInput quando viene selezionata una nuova opzione, quando l'utente seleziona un'opzione differente nel menu a discesa, l'evento change verrà attivato. 
 document.querySelector(".my-select").addEventListener("change", function(){
@@ -19,7 +20,9 @@ document.querySelector(".my-select").addEventListener("change", function(){
 // Aggiunge un listener al pulsante btnStart per generare i quadrati
 btnStart.addEventListener("click", function() {
   reset();
+  createbombs(limit(), bombs)
   getHundredSq();
+  console.log(bombs)
 });
 
 // Aggiunge un listener al pulsante btnReset per resettare la tela
@@ -32,6 +35,19 @@ getHundredSq();
 
 // functions/////
 
+function init(){
+  reset();
+  getHundredSq()
+  square100()
+}
+
+
+// funzione per resettare la tela
+function reset(){
+  canva.innerHTML = ""
+}
+
+
 // funzione per creare 100 quadrati e stamparli in pagina dentro a canva
 function getHundredSq(){
   for(let i = 1; i <= limit(); i++){
@@ -40,6 +56,9 @@ function getHundredSq(){
     canva.append(square);
   }
 }
+
+// qui creo le bombe
+
 // funzione per generare i quadrati all interno della canva, e al click applica la classe .clicked, in più aggiungendo una costante(squareText) scrivendola nel sq.
 function square100(indice){
 
@@ -96,21 +115,6 @@ function setHowManySquare(){
 
 }
 
-// in base alla difficoltà impostata con la select mette un limite numerico al quale i dovrà essere <=
-// function setlimit(){
-//   let limit = "";
-
-//   if(selectInput == "Noob"){
-//     return limit = 100;
-//   }else if(selectInput == "Normal"){
-//     return limit = 81;
-//   }else if(selectInput == "Master"){
-//     return limit = 49;
-//   }
-
-//   return limit = 100
-
-// }
 
 // con questa funzione metto un limite al ciclo for per generare un tot di quadrati
 function limit(){
@@ -121,18 +125,24 @@ function limit(){
 
 
 
-
-
-function init(){
-  reset();
-  getHundredSq()
-  square100()
-}
-
-
-// funzione per resettare la tela
-function reset(){
-  canva.innerHTML = ""
-}
-
 // Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: **nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
+
+// funzione che genera casellebomba con indice random, controlla che l indice estratto non sia già presente nell' array bombe e le pusha nell array bombe
+function createbombs(limitSq, bombs) {
+  while (bombs.length < 16) { // Controlla se l'array delle bombe ha meno di 16 elementi
+    let randomIndex = Math.floor(Math.random() * limitSq) + 1;
+    if (!bombs.includes(randomIndex)) {
+      bombs.push(randomIndex);
+    }
+  }
+  console.log(bombs);
+}
+
+
+
+createbombs(100)
+console.log(createbombs())
+
+function randomindexbombs(){
+  
+}
