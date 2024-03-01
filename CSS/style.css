@@ -144,3 +144,11 @@ img:hover{
   background-color: #ffffff;
 }
 
+.bomb{
+  background-color: red;
+  color: white;
+}
+
+.endgamecolor{
+  background-color: rgb(0, 0, 0);
+}

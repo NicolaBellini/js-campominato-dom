@@ -3,6 +3,8 @@
 const canva = document.querySelector(".canva")
 const btnStart = document.querySelector(".btn1")
 const btnReset = document.querySelector(".btn2")
+const output = document.getElementById("output")
+let counter= 0;
 
 // DATA
 let selectInput = document.querySelector(".my-select").value
@@ -28,15 +30,14 @@ btnStart.addEventListener("click", function() {
 // Aggiunge un listener al pulsante btnReset per resettare la tela
 btnReset.addEventListener("click", reset);
 
-// Inizializza l'applicazione
-reset();
-getHundredSq();
+
 
 
 // functions/////
 
 function init(){
   reset();
+  output.innerHTML = ""
   getHundredSq()
   square100()
 }
@@ -45,6 +46,8 @@ function init(){
 // funzione per resettare la tela
 function reset(){
   canva.innerHTML = ""
+  bombs.length = 0
+  counter = 0
 }
 
 
@@ -57,9 +60,8 @@ function getHundredSq(){
   }
 }
 
-// qui creo le bombe
 
-// funzione per generare i quadrati all interno della canva, e al click applica la classe .clicked, in più aggiungendo una costante(squareText) scrivendola nel sq.
+// funzione per generare i quadrati all interno della canva, e al click applica la classe .clicked, in più aggiungendo una costante(squareText) scrivendola nel sq., poi controllo quali indici sono dentro la array bombs e quali no, se sono dentro l array bombs gli metto la classe .bomb, se no gli metto la classe clicked
 function square100(indice){
 
 
@@ -82,17 +84,20 @@ function square100(indice){
 
     // al click del mouse aggiungo otolgo la classe .clicked, però non ho ancora tolto squaretext messo con il primo click
     // MODIFICATO ho tolto toggle e messo add
-    sq.classList.add("clicked")
+    // al click del mouse aggiungo .clicked
+    if (!this.classList.contains("clicked")) {
+      this.classList.add("clicked");
+      counter++;
+    } 
+    console.log(counter)
 
-    // usando un fattore ternario applico un blocco if
-    this.innerHTML = (this.classList.contains("clicked"))?
-                    this.innerhtml = squareText:
-                    this.innerHTML = ""                  
-
-    console.log(squareText);
-
-    
+    // se l'indice è presente nell'array delle bombe, aggiungo la classe "bomb"
+    if (bombs.includes(indice)) {
+      this.classList.add("bomb");
+      endgame();
+    }
   })
+  
 //  return sq molto importante alrimenti non sa cosa deve ritornare
   return sq
 }
@@ -123,26 +128,39 @@ function limit(){
   return limit
 }
 
-
-
-// Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe. Attenzione: **nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
-
-// funzione che genera casellebomba con indice random, controlla che l indice estratto non sia già presente nell' array bombe e le pusha nell array bombe
+// con questa funzione creo 16 bomb con indice casuae e se non sono presenti nell array bombs le pusho dentro
 function createbombs(limitSq, bombs) {
-  while (bombs.length < 16) { // Controlla se l'array delle bombe ha meno di 16 elementi
+  while (bombs.length < 16) {
     let randomIndex = Math.floor(Math.random() * limitSq) + 1;
+
     if (!bombs.includes(randomIndex)) {
       bombs.push(randomIndex);
     }
   }
-  console.log(bombs);
 }
 
-
-
-createbombs(100)
-console.log(createbombs())
-
-function randomindexbombs(){
+function endgame() {
+  const squares = document.querySelectorAll(".canva > div");
   
+  // Aggiungo la classe "endgamecolor" a tutti gli sq
+  squares.forEach(square => {
+    square.classList.add("endgamecolor");
+
+  });
+  // Aggiungo la classe "bomb" agli elementi presenti nell'array bombs
+  bombs.forEach(index => {
+    const bombElement = document.querySelector(`[data-sqid="${index}"]`);
+    bombElement.classList.add("bomb");
+    if(!(bombElement.innerHTML="")){
+      bombElement.innerHTML += index
+
+    }
+  });
+  output.innerHTML+=`Hai totalizzato: ${counter} punti`;
+
+  reset()
 }
+
+
+
+
