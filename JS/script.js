@@ -36,14 +36,6 @@ btnReset.addEventListener("click", reset);
 
 // functions/////
 
-function init(){
-  reset();
-  getHundredSq()
-  square100()
-  
-}
-
-
 // funzione per resettare la tela
 function reset(){
   canva.innerHTML = ""
@@ -144,10 +136,10 @@ function endgame() {
   const squares = document.querySelectorAll(".canva > div");
   
   // Aggiungo la classe "endgamecolor" a tutti gli sq
-  squares.forEach(square => {
-    square.classList.add("endgamecolor");
+  // squares.forEach(square => {
+  //   square.removeEventListener("click", function(){})//non riesco a togliere l event
 
-  });
+  // });
   // Aggiungo la classe "bomb" agli elementi presenti nell'array bombs
   bombs.forEach(index => {
     const bombElement = document.querySelector(`[data-sqid="${index}"]`);
@@ -157,9 +149,10 @@ function endgame() {
 
     }
   });
+  console.log(squares);
   output.innerHTML+=`Hai totalizzato: ${counter} punti`;
 
-  reset()
+  // reset()
 }
 
 
