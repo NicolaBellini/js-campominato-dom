@@ -96,7 +96,6 @@ function square100(indice){
 }
 
 
-
 // se lka difficoltà è easy metto la classe 100, medium metto 81 quadrati e se è hard 49, gestendoli con le classi css
 function setHowManySquare(){
   let setteddifficult = "";
@@ -140,7 +139,7 @@ function endgame() {
   //   square.removeEventListener("click", function(){})//non riesco a togliere l event
 
   // });
-  // Aggiungo la classe "bomb" agli elementi presenti nell'array bombs
+  // Trova l'elemento del quadrato corrispondente all'indice presente nell'array bombs. Utilizza l'indice per selezionare l'elemento con l'attributo data-sqid corrispondente all'indice.
   bombs.forEach(index => {
     const bombElement = document.querySelector(`[data-sqid="${index}"]`);
     bombElement.classList.add("bomb");
