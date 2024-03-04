@@ -149,6 +149,8 @@ img:hover{
   color: white;
 }
 
-.endgamecolor{
-  background-color: rgb(0, 0, 0);
+#end-game-cover{
+  height: 100%;
+  width: 100%;
+  background-color: black;
 }

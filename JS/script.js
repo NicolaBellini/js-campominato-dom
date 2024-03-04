@@ -82,10 +82,11 @@ function square100(indice){
       this.classList.add("clicked");
       counter++;
     } 
-    console.log(counter)
 
     // se l'indice è presente nell'array delle bombe, aggiungo la classe "bomb"
     if (bombs.includes(indice)) {
+      // ho messo counter -1 per togliere il punto in più che veniva aggiunto se cliccavo sulla bomba
+      counter -1
       this.classList.add("bomb");
       endgame();
     }
@@ -120,6 +121,9 @@ function limit(){
   return limit
 }
 
+
+
+
 // con questa funzione creo 16 bomb con indice casuae e se non sono presenti nell array bombs le pusho dentro
 function createbombs(limitSq, bombs) {
   while (bombs.length < 16) {
@@ -144,13 +148,13 @@ function endgame() {
     const bombElement = document.querySelector(`[data-sqid="${index}"]`);
     bombElement.classList.add("bomb");
     if(!(bombElement.innerHTML="")){
-      bombElement.innerHTML += index
-
+      bombElement.innerHTML += index;
     }
   });
   console.log(squares);
   output.innerHTML+=`Hai totalizzato: ${counter} punti`;
-
+  // creo un livello che mi impedisca di cliccare sulle caselle
+  canva.innerHTML += `<div id="end-game-cover"></div>`
   // reset()
 }
 
